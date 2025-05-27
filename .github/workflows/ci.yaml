@@ -27,16 +27,16 @@ jobs:
         run: composer install -n -o --no-suggest --no-dev
 
       - name: Lint
-        run: ./vendor/bin/parallel-lint ./src ./tests
+        run: parallel-lint ./src ./tests
 
       - name: Coding Standards
-        run: PHP_CS_FIXER_IGNORE_ENV=1 ./vendor/bin/php-cs-fixer check
+        run: PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer check
 
       - name: Static Analysis
-        run: ./vendor/bin/phpstan analyse
+        run: phpstan analyse
 
       - name: Unit Tests
-        run: ./vendor/bin/phpunit
+        run: phpunit
 
       - name: Mutation Tests
-        run: ./vendor/bin/infection
+        run: infection
