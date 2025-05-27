@@ -22,9 +22,9 @@ jobs:
           coverage: xdebug
           php-version: ${{ matrix.php_versions }}
           extensions: ctype, dom, filter, hash, iconv, json, xml , mbstring, reflection, tokenizer
-          tools: composer
+          tools: composer, parallel-lint, infection, phpunit, phpstan, php-cs-fixer
       - name: Install Dependencies
-        run: composer install -n -o --no-suggest
+        run: composer install -n -o --no-suggest --no-dev
 
       - name: Lint
         run: ./vendor/bin/parallel-lint ./src ./tests
