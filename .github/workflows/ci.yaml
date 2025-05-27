@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix: 
-        php_versions: ['8.3', '8.4']
+        php_versions: ['8.0', '8.1', '8.2', '8.3', '8.4']
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -24,7 +24,7 @@ jobs:
           extensions: ctype, dom, filter, hash, iconv, json, xml , mbstring, reflection, tokenizer
           tools: composer, parallel-lint, infection, phpunit, phpstan, php-cs-fixer
       - name: Install Dependencies
-        run: composer install -n -o --no-suggest --no-dev
+        run: composer install -n -o
 
       - name: Lint
         run: parallel-lint ./src ./tests
