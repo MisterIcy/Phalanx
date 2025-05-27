@@ -1,0 +1,7 @@
+{
+    "name": "mistericy/phalanx",
+    "description": "AI Development Framework in PHP",
+    "type": "library",
+    "license": "MIT",
+    "require": {}
+}
