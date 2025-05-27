@@ -3,5 +3,31 @@
     "description": "AI Development Framework in PHP",
     "type": "library",
     "license": "MIT",
-    "require": {}
+    "require": {
+        "php": ">=8.0, <8.5"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.1",
+        "infection/infection": "^0.29.14",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Phalanx\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phalanx\\Tests\\": "tests/"
+        }
+    }
 }
