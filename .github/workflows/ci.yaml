@@ -1,0 +1,42 @@
+name: Continuous Integration
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    name: CI Checks (PHP ${{ matrix.php_versions }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix: 
+        php_versions: ['8.0', '8.1', '8.2', '8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with: 
+          coverage: xdebug
+          php-version: ${{ matrix.php_versions }}
+          extensions: ctype, dom, filter, hash, iconv, json, xml , mbstring, reflection, tokenizer
+          tools: composer
+      - name: Install Dependencies
+        run: composer install -n -o --no-suggest
+
+      - name: Lint
+        run: ./vendor/bin/parallel-lint ./src ./tests
+
+      - name: Coding Standards
+        run: PHP_CS_FIXER_IGNORE_ENV=1 ./vendor/bin/php-cs-fixer check
+
+      - name: Static Analysis
+        run: ./vendor/bin/phpstan analyse
+
+      - name: Unit Tests
+        run: ./vendor/bin/phpunit
+
+      - name: Mutation Tests
+        run: ./vendor/bin/infection
