@@ -29,7 +29,7 @@ final class NonEmptyStringTest extends TestCase
     public function testThatObjectGetsProperlyCreated(): void
     {
         $object = new NonEmptyString('Phalanx');
-        $this->assertSame('Phalanx', $object->getValue());
-        $this->assertSame('Phalanx', (string)$object);
+        self::assertSame('Phalanx', $object->getValue());
+        self::assertSame('Phalanx', (string)$object);
     }
 }
